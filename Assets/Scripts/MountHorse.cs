@@ -10,23 +10,20 @@ public class MountHorse : MonoBehaviour {
 
 	GameObject Mountable = null;
 
+	PlayerControls playerControls;
+
 	// Use this for initialization
 	void Start () {
 		Player = GameObject.FindGameObjectWithTag ("Player");
+		playerControls = Player.GetComponent<PlayerControls>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-		if (IsOverlapping && (OVRInput.Get (OVRInput.Axis1D.PrimaryIndexTrigger) > 0 || OVRInput.Get (OVRInput.Axis1D.SecondaryIndexTrigger) > 0) && Player.transform.parent != Mountable) {
-			Debug.Log ("Mounting");
-			Player.transform.SetParent(Mountable.transform);
-			Collider[] Colliders = Player.GetComponentsInChildren<Collider> ();
-			foreach (Collider col in Colliders) {
-				Physics.IgnoreCollision (col, Mountable.GetComponent<Collider> ());
-			}
-			Player.transform.localPosition = new Vector3 (0.0f, 0.0f, 0.0f);
-			//Player.GetComponent<OVRPlayerController>()
+		// Check to mount
+		if (IsOverlapping && (OVRInput.Get (OVRInput.Axis1D.PrimaryIndexTrigger) > 0 || OVRInput.Get (OVRInput.Axis1D.SecondaryIndexTrigger) > 0) && !playerControls.IsMounted) {
+			playerControls.Mount (Mountable);
 		}
 
 	}
@@ -41,7 +38,6 @@ public class MountHorse : MonoBehaviour {
 	void OnTriggerExit(Collider other) {
 		if (other.tag == "Saddle") {
 			IsOverlapping = false;
-			//Mountable = null;
 		}
 	}
 
