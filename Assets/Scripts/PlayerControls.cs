@@ -13,6 +13,11 @@ public class PlayerControls : MonoBehaviour {
 
 	GameObject trackingSpace = null;
 
+	GameObject leftHand;
+	GameObject rightHand;
+	Vector3 Direct;
+	float handsPositions;
+
 	// Use this for initialization
 	void Start () {
 		trackingSpace = GameObject.Find("TrackingSpace");
@@ -29,7 +34,28 @@ public class PlayerControls : MonoBehaviour {
 		if (IsMounted && (OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger) > 0 && OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) > 0)) {
 			Unmount ();
 		}
-			
+
+
+		if(leftHand == null){
+			leftHand = GameObject.Find ("hands:b_l_hand");
+		}
+		if (rightHand == null) {
+			rightHand = GameObject.Find ("hands:b_r_hand");
+		}
+
+		if (leftHand != null && rightHand != null) {
+			handsPositions = Vector3.Distance (rightHand.transform.position, leftHand.transform.position);
+			//Direct = rightHand.transform.position - leftHand.transform.position;
+			//handsDistance = Direct;
+			//Direct.Normalize ();
+
+			//print ("Direction : " + Direct);
+			if (OVRInput.Get (OVRInput.Axis1D.PrimaryHandTrigger) > 0 && OVRInput.Get (OVRInput.Axis1D.PrimaryIndexTrigger) > 0 && OVRInput.Get (OVRInput.Axis1D.SecondaryHandTrigger) > 0 && OVRInput.Get (OVRInput.Axis1D.SecondaryIndexTrigger) > 0) {
+				print ("Left Hand Positions: " + leftHand.transform.position);
+				print ("Right Hand Positions: " + rightHand.transform.position);
+				print ("Player Position: " + transform.position);
+			}
+		}
 	}
 
 	void FixedUpdate () {
