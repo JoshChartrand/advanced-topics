@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114862508957344620}
   - component: {fileID: 65463024123476770}
   - component: {fileID: 114477655722722818}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: backpack_final
   m_TagString: Backpack
   m_Icon: {fileID: 0}
@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 65020938297177456}
   - component: {fileID: 65752340848282796}
   - component: {fileID: 65520423998582016}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: packbottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65,7 +65,7 @@ GameObject:
   - component: {fileID: 65516265643962036}
   - component: {fileID: 65337053377283026}
   - component: {fileID: 114430017040088824}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: StrapTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83,7 +83,7 @@ GameObject:
   - component: {fileID: 33552541762508192}
   - component: {fileID: 23963279523268644}
   - component: {fileID: 64048033939935776}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: packright
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 65992580103283804}
   - component: {fileID: 65961149962565940}
   - component: {fileID: 65379103700950864}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: packtop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 33544224550273964}
   - component: {fileID: 23309127895249486}
   - component: {fileID: 64194570391578462}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: packleft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -186,8 +186,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1222845555234608}
-  m_LocalRotation: {x: -0, y: -0.11025832, z: -0, w: 0.993903}
-  m_LocalPosition: {x: -2.069, y: 5.595, z: -0.893}
+  m_LocalRotation: {x: -0, y: 0.99756664, z: -0, w: 0.06972022}
+  m_LocalPosition: {x: -0.65, y: 3.11, z: 58.589}
   m_LocalScale: {x: 1.9520637, y: 1.9520637, z: 1.9520637}
   m_Children:
   - {fileID: 4369158865783954}
@@ -197,7 +197,7 @@ Transform:
   - {fileID: 4956425225011602}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -12.660001, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 172.00401, z: 0}
 --- !u!4 &4956425225011602
 Transform:
   m_ObjectHideFlags: 1
@@ -390,7 +390,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 126
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!64 &64048033939935776
 MeshCollider:
@@ -603,6 +603,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b06965b49eeea1c4c85a67d2db019af4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsEquipped: 0
+  IsCurrentlyEquipping: 0
+  Unequipping: 0
 --- !u!114 &114862508957344620
 MonoBehaviour:
   m_ObjectHideFlags: 1

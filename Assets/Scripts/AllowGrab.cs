@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class AllowGrab : MonoBehaviour {
 
-	bool IsEquipped = false;
+	public bool IsEquipped = false;
+
+	public bool IsCurrentlyEquipping = false;
 
 	OVRGrabbable grabbable;
 
-	bool Unequipping = false;
+	public bool Unequipping = false;
 
 	GameObject socket;
 
@@ -16,6 +18,7 @@ public class AllowGrab : MonoBehaviour {
 	void Start () {
 		grabbable = GetComponent<OVRGrabbable> ();
 		socket = GameObject.FindGameObjectWithTag ("Socket");
+		//AttachToSocket ();
 	}
 	
 	// Update is called once per frame
@@ -23,41 +26,77 @@ public class AllowGrab : MonoBehaviour {
 
 		if (grabbable.isGrabbed) {
 			GetComponent<Animator> ().enabled = false;
+			if(transform.gameObject.layer != LayerMask.NameToLayer("Player")) {
+				ChangeLayerRecursively (transform, "Player");
+			}
 		} else {
 			GetComponent<Animator> ().enabled = true;
+			if (IsEquipped && transform.rotation != transform.parent.rotation) {
+				transform.rotation = transform.parent.rotation;
+				IsCurrentlyEquipping = false;
+			}
+			if(transform.gameObject.layer != LayerMask.NameToLayer("Default")) {
+				ChangeLayerRecursively (transform, "Default");
+			}
 			if (Unequipping) {
 				Unequipping = false;
 			}
 		}
 
-		if (grabbable.isGrabbed && IsEquipped && (OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger) > 0 || OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) > 0)) {
+		if (grabbable.isGrabbed && IsEquipped && (OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger) > 0 || OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) > 0) && !IsCurrentlyEquipping) {
 			GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.None;
+			GetComponent<Rigidbody> ().useGravity = true;
 			IsEquipped = false;
 			transform.parent = null;
 			Unequipping = true;
 		}
-		
 	}
 
 	void OnTriggerEnter(Collider other) {
+		/*
 		if (other.gameObject.tag == "PlayerBag" && !IsEquipped) {
 			GetComponent<Animator> ().SetBool ("IsPlayerClose", true);
 			GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.None;
 		}
+		*/
 
 		if (other.gameObject.tag == "Socket" && grabbable.isGrabbed && !IsEquipped && !Unequipping) {
-			IsEquipped = true;
-			GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeAll;
-			transform.SetParent(GameObject.FindGameObjectWithTag("Player").transform);
-			transform.localPosition = new Vector3 (0.0f, 0.1f, -0.3f);
+			AttachToSocket ();
 		}
 	}
 
 	void OnTriggerExit(Collider other) {
+
+		/*
 		if (other.gameObject.tag == "PlayerBag" && !IsEquipped && !grabbable.isGrabbed) {
 			GetComponent<Animator> ().SetBool ("IsPlayerClose", false);
 			GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeAll;
+			GetComponent<Rigidbody> ().useGravity = true;
 			IsEquipped = false;
+		}
+		*/
+	}
+
+	void AttachToSocket() {
+		IsEquipped = true;
+		IsCurrentlyEquipping = true;
+		GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeAll;
+		GetComponent<Rigidbody> ().useGravity = false;
+		transform.SetParent(socket.transform);
+		transform.localPosition = new Vector3 (0.0f, 0.0f, 0.0f);
+	}
+
+	void DetachFromSocket() {
+		Unequipping = true;
+		GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.None;
+		IsEquipped = false;
+		transform.parent = null;
+	}
+
+	void ChangeLayerRecursively(Transform trans, string name) {
+		trans.gameObject.layer = LayerMask.NameToLayer (name);
+		foreach (Transform child in trans) {
+			ChangeLayerRecursively(child.transform, name);
 		}
 	}
 }

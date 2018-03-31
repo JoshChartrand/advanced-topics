@@ -68,7 +68,7 @@ public class PlayerControls : MonoBehaviour {
 		ChangeLayerRecursively (Mountable.transform, "Mount");
 		Mountable.transform.SetParent (transform);
 		Mountable.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeAll;
-		trackingSpace.transform.localPosition = new Vector3(trackingSpace.transform.localPosition.x, trackingSpace.transform.localPosition.y + 0.35f, trackingSpace.transform.localPosition.z);
+		trackingSpace.transform.localPosition = new Vector3(trackingSpace.transform.localPosition.x, trackingSpace.transform.localPosition.y + 1.0f, trackingSpace.transform.localPosition.z);
 		Mountable.transform.localPosition = new Vector3 (0.25f, Mountable.transform.localPosition.y, 0.5f);
 		Mountable.transform.localRotation = Quaternion.identity;
 		//Player.GetComponent<CharacterController> ().radius = 2.5f;
@@ -80,11 +80,11 @@ public class PlayerControls : MonoBehaviour {
 		Mountable.transform.parent = null;
 		Mountable.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.None;
 		Mountable.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeRotation;
-		Mountable.transform.position = new Vector3 (transform.position.x, 2.0f, transform.position.z + 2.5f);
+		Mountable.transform.position = new Vector3 (transform.position.x, 0.0f, transform.position.z + 3.0f);
 		Vector3 lookAtPosition = transform.position - Mountable.transform.position;
 		lookAtPosition.y = 0.0f;
 		Mountable.transform.rotation = Quaternion.LookRotation (lookAtPosition);
-		trackingSpace.transform.localPosition = new Vector3(trackingSpace.transform.localPosition.x, trackingSpace.transform.localPosition.y - 0.35f, trackingSpace.transform.localPosition.z);
+		trackingSpace.transform.localPosition = new Vector3(trackingSpace.transform.localPosition.x, trackingSpace.transform.localPosition.y - 1.0f, trackingSpace.transform.localPosition.z);
 		ChangeLayerRecursively (Mountable.transform, "Default");
 	}
 
