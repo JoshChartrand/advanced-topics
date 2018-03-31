@@ -34,7 +34,10 @@ public class PlayerControls : MonoBehaviour {
 		if (IsMounted && (OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger) > 0 && OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) > 0)) {
 			Unmount ();
 		}
-
+			
+		if (IsMounted) {
+			Mountable.GetComponent<Animator>().SetFloat("Velocity", GetComponent<CharacterController>().velocity.magnitude);
+		}
 
 		if(leftHand == null){
 			leftHand = GameObject.Find ("hands:b_l_hand");
@@ -63,6 +66,7 @@ public class PlayerControls : MonoBehaviour {
 	}
 
 	public void Mount(GameObject mount) {
+		GetComponent<OVRPlayerController> ().SetMoveScaleMultiplier (2.0f);
 		Mountable = mount;
 		IsMounted = true;
 		ChangeLayerRecursively (Mountable.transform, "Mount");
@@ -71,11 +75,11 @@ public class PlayerControls : MonoBehaviour {
 		trackingSpace.transform.localPosition = new Vector3(trackingSpace.transform.localPosition.x, trackingSpace.transform.localPosition.y + 1.0f, trackingSpace.transform.localPosition.z);
 		Mountable.transform.localPosition = new Vector3 (0.25f, Mountable.transform.localPosition.y, 0.5f);
 		Mountable.transform.localRotation = Quaternion.identity;
-		//Player.GetComponent<CharacterController> ().radius = 2.5f;
-		//Player.GetComponent<CharacterController> ().height = 5.0f;
 	}
 
 	void Unmount() {
+		Mountable.GetComponent<Animator>().SetFloat("Velocity", 0.0f);
+		GetComponent<OVRPlayerController> ().SetMoveScaleMultiplier (1.0f);
 		IsMounted = false;
 		Mountable.transform.parent = null;
 		Mountable.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.None;
