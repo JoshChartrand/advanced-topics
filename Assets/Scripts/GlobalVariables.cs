@@ -5,6 +5,7 @@ using UnityEngine;
 public class GlobalVariables : MonoBehaviour {
 	private static bool newQuest;
 	private static int questNum;
+	private static bool mounting;
 
 	// Use this for initialization
 	void Start () {
@@ -31,6 +32,17 @@ public class GlobalVariables : MonoBehaviour {
 
 		set {
 			questNum = value; 
+		}
+	}
+
+	public static bool Mounting {
+
+		get {
+			return mounting; 
+		}
+
+		set {
+			mounting = value; 
 		}
 	}
 }
