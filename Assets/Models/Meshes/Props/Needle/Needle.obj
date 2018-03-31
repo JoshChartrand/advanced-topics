@@ -1,0 +1,22 @@
+# This file uses centimeters as units for non-parametric coordinates.
+
+mtllib Needle.mtl
+g default
+v 0.277018 1.186041 3.248272
+v 0.873406 1.186041 -0.158715
+v -0.319371 1.186041 -0.158715
+v 0.277018 1.186041 -3.565701
+vt 0.000000 1.000000
+vt 1.000000 0.000000
+vt 1.000000 1.000000
+vt 0.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+s 1
+g polySurface10 polySurface5
+usemtl initialShadingGroup
+f 3/1/1 2/2/2 4/3/3
+usemtl lambert3SG
+f 1/4/4 2/2/2 3/1/1
