@@ -31,7 +31,7 @@ public class PlayerControls : MonoBehaviour {
 		}
 
 		// Checking to unmount
-		if (IsMounted && (OVRInput.Get(OVRInput.Button.Two) > 0 && OVRInput.Get(OVRInput.Button.Four) > 0)) {
+		if (IsMounted && (OVRInput.Get(OVRInput.Button.Two) == true && OVRInput.Get(OVRInput.Button.Four) == true)) {
 			Unmount ();
 		}
 			
