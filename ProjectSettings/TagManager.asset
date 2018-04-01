@@ -10,6 +10,7 @@ TagManager:
   - Backpack
   - Item
   - Saddle
+  - Weapon
   layers:
   - Default
   - TransparentFX

@@ -15,9 +15,7 @@ public class CheckForCut : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision col) {
-		Debug.Log (col.relativeVelocity.magnitude);
-		//col.gameObject.tag == "Weapon" && 
-		if (col.relativeVelocity.magnitude >= 20) {
+		if (col.gameObject.name == "Sickle" && col.relativeVelocity.magnitude >= 20) {
 			GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.None;
 		}
 	}
