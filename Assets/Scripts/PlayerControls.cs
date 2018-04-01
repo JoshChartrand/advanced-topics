@@ -31,7 +31,7 @@ public class PlayerControls : MonoBehaviour {
 		}
 
 		// Checking to unmount
-		if (IsMounted && (OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger) > 0 && OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) > 0)) {
+		if (IsMounted && (OVRInput.Get(OVRInput.Button.Two) > 0 && OVRInput.Get(OVRInput.Button.Four) > 0)) {
 			Unmount ();
 		}
 			
@@ -53,10 +53,34 @@ public class PlayerControls : MonoBehaviour {
 			//Direct.Normalize ();
 
 			//print ("Direction : " + Direct);
-			if (OVRInput.Get (OVRInput.Axis1D.PrimaryHandTrigger) > 0 && OVRInput.Get (OVRInput.Axis1D.PrimaryIndexTrigger) > 0 && OVRInput.Get (OVRInput.Axis1D.SecondaryHandTrigger) > 0 && OVRInput.Get (OVRInput.Axis1D.SecondaryIndexTrigger) > 0) {
-				print ("Left Hand Positions: " + leftHand.transform.position);
-				print ("Right Hand Positions: " + rightHand.transform.position);
-				print ("Player Position: " + transform.position);
+			//if (OVRInput.Get (OVRInput.Axis1D.PrimaryHandTrigger) > 0 && OVRInput.Get (OVRInput.Axis1D.PrimaryIndexTrigger) > 0 && OVRInput.Get (OVRInput.Axis1D.SecondaryHandTrigger) > 0 && OVRInput.Get (OVRInput.Axis1D.SecondaryIndexTrigger) > 0) {
+				//print ("Left Hand Positions: " + leftHand.transform.position);
+				//print ("Right Hand Positions: " + rightHand.transform.position);
+				//print ("Player Position: " + transform.position);
+			//}
+			if(GlobalVariables.Mounting == true){
+				//makes sure both hands are in a fist
+				if (OVRInput.Get (OVRInput.Axis1D.PrimaryHandTrigger) > 0 && OVRInput.Get (OVRInput.Axis1D.PrimaryIndexTrigger) > 0 && OVRInput.Get (OVRInput.Axis1D.SecondaryHandTrigger) > 0 && OVRInput.Get (OVRInput.Axis1D.SecondaryIndexTrigger) > 0) {
+					//Vector3 applesauce = new Vector3(transform.position.x * Direct.x, transform.position.y * Direct.y, transform.position.z * Direct.z);
+					//print (applesauce);
+
+					//if both hands are forward move forward
+					//velocity forward
+
+					//if both hands are near chest stop
+					//no velocity
+					print("Player: " + transform.position);
+					print("Left Controller: " + leftHand.transform.position);
+					print("Right Controller: " + rightHand.transform.position);
+
+					//if both hands are right go right
+					//turn players forward right
+
+					//if both hands are left go left
+					//turn player forward left
+
+					//transform.Translate ( Direct.x * 1.2f,  Direct.y * 1.2f, Direct.z * 1.2f);
+				}
 			}
 		}
 	}
@@ -69,6 +93,7 @@ public class PlayerControls : MonoBehaviour {
 		GetComponent<OVRPlayerController> ().SetMoveScaleMultiplier (2.0f);
 		Mountable = mount;
 		IsMounted = true;
+		GlobalVariables.Mounting = IsMounted;
 		ChangeLayerRecursively (Mountable.transform, "Mount");
 		Mountable.transform.SetParent (transform);
 		Mountable.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeAll;
@@ -81,6 +106,7 @@ public class PlayerControls : MonoBehaviour {
 		Mountable.GetComponent<Animator>().SetFloat("Velocity", 0.0f);
 		GetComponent<OVRPlayerController> ().SetMoveScaleMultiplier (1.0f);
 		IsMounted = false;
+		GlobalVariables.Mounting = IsMounted;
 		Mountable.transform.parent = null;
 		Mountable.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.None;
 		Mountable.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeRotation;

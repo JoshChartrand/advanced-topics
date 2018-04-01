@@ -28,6 +28,7 @@ public class AI : MonoBehaviour {
 	private float Waitimez = 0;
 	private float WaiRandTime;
 
+	private float y;
 	//public Texture2D catTex;
 	//public Texture2D zombieTex;
 	//private SkinnedMeshRenderer rend;
@@ -49,6 +50,8 @@ public class AI : MonoBehaviour {
 		DirRandTime = Random.Range (DirMinTime, DirMaxTime);
 		StaRandTime = Random.Range (StaMinTime, StaMaxTime);
 		WaiRandTime = Random.Range (WaiMinTime, WaiMaxTime);
+
+		y = transform.position.y;
 	}
 
 	// Update is called once per frame
@@ -77,6 +80,10 @@ public class AI : MonoBehaviour {
 				Waitimez = Time.time;
 				WaiRandTime = Random.Range (WaiMinTime, WaiMaxTime);
 			}
+		}
+
+		if(y != transform.position.y){
+			transform.position = new Vector3 (transform.position.x, y, transform.position.z);
 		}
 	}
 
