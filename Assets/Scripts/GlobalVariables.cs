@@ -7,6 +7,8 @@ public class GlobalVariables : MonoBehaviour {
 	private static int questNum;
 	private static bool mounting;
 
+	private static bool MOVEleft;
+
 	// Use this for initialization
 	void Start () {
 		newQuest = true;
@@ -43,6 +45,17 @@ public class GlobalVariables : MonoBehaviour {
 
 		set {
 			mounting = value; 
+		}
+	}
+
+	public static bool moveLEFT {
+
+		get {
+			return MOVEleft; 
+		}
+
+		set {
+			MOVEleft = value; 
 		}
 	}
 }

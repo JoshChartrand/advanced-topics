@@ -5,6 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class PlayerControls : MonoBehaviour {
 
+	public GameObject leftAnchor;
+	public GameObject rightAnchor;
+	private float handZ;
+	private float originZ;
+	private float handX;
+
 	public bool IsMounted = false;
 
 	public float MountedHeight = 0.0f;
@@ -31,7 +37,7 @@ public class PlayerControls : MonoBehaviour {
 		}
 
 		// Checking to unmount
-		if (IsMounted && (OVRInput.Get(OVRInput.Button.Two) > 0 && OVRInput.Get(OVRInput.Button.Four) > 0)) {
+		if (IsMounted && (OVRInput.Get(OVRInput.Button.Two) == true && OVRInput.Get(OVRInput.Button.Four) == true)) {
 			Unmount ();
 		}
 			
@@ -64,20 +70,53 @@ public class PlayerControls : MonoBehaviour {
 					//Vector3 applesauce = new Vector3(transform.position.x * Direct.x, transform.position.y * Direct.y, transform.position.z * Direct.z);
 					//print (applesauce);
 
+					print ("leftHand " + leftAnchor.transform.localPosition);
+					print ("rightHand " + rightAnchor.transform.localPosition);
+
+					handZ = ((leftAnchor.transform.localPosition.z + rightAnchor.transform.localPosition.z) / 2);
 					//if both hands are forward move forward
 					//velocity forward
+					if(handZ > originZ ){
+						print ("move");
+						handZ = handZ - originZ ;
+						handZ = handZ * 4;
+						Vector3 temp = new Vector3(transform.forward.x * handZ, transform.forward.y * handZ, transform.forward.z * handZ);
+						GetComponent<OVRPlayerController> ().SetMoveScaleMultiplier (handZ);
+						GetComponent<CharacterController> ().Move (temp);
+					}
+
+					handZ = ((leftAnchor.transform.localPosition.z + rightAnchor.transform.localPosition.z) / 2);
 
 					//if both hands are near chest stop
 					//no velocity
-					print("Player: " + transform.position);
-					print("Left Controller: " + leftHand.transform.position);
-					print("Right Controller: " + rightHand.transform.position);
+					if(handZ <= originZ){
+						print ("stop");
+						GetComponent<OVRPlayerController> ().SetMoveScaleMultiplier (0.0f);
+					}
+
+					//print("Player: " + transform.position);
+					//print("Left Controller: " + leftHand.transform.position);
+					//print("Right Controller: " + rightHand.transform.position);
 
 					//if both hands are right go right
 					//turn players forward right
+					handX = ((leftAnchor.transform.localPosition.x + rightAnchor.transform.localPosition.x) / 2);
+					if(handX > 0){
+						print ("right");
+						//OVRPlayerController.moveRight == true;
+					}else{
+						//OVRPlayerController.moveRight == false;
+					}
 
+					handX = ((leftAnchor.transform.localPosition.x + rightAnchor.transform.localPosition.x) / 2);
 					//if both hands are left go left
 					//turn player forward left
+					if (handX < 0) {
+						print ("left");
+						GlobalVariables.moveLEFT = true;
+					} else {
+						GlobalVariables.moveLEFT = false;
+					}
 
 					//transform.Translate ( Direct.x * 1.2f,  Direct.y * 1.2f, Direct.z * 1.2f);
 				}
@@ -90,6 +129,7 @@ public class PlayerControls : MonoBehaviour {
 	}
 
 	public void Mount(GameObject mount) {
+		originZ = ((leftAnchor.transform.localPosition.z + rightAnchor.transform.localPosition.z) / 2);
 		GetComponent<OVRPlayerController> ().SetMoveScaleMultiplier (2.0f);
 		Mountable = mount;
 		IsMounted = true;

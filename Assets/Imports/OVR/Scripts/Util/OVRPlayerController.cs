@@ -28,6 +28,10 @@ using System.Collections.Generic;
 [RequireComponent(typeof(CharacterController))]
 public class OVRPlayerController : MonoBehaviour
 {
+	public bool moveForward ;
+	public bool moveLeft;
+	public bool moveRight;
+	public bool moveBack;
 	/// <summary>
 	/// The rate acceleration during movement.
 	/// </summary>
@@ -233,10 +237,10 @@ public class OVRPlayerController : MonoBehaviour
 		if (HaltUpdateMovement)
 			return;
 
-		bool moveForward = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
-		bool moveLeft = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow);
-		bool moveRight = Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow);
-		bool moveBack = Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
+		moveForward = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
+		moveLeft = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow) || GlobalVariables.moveLEFT;
+		moveRight = Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow);
+		moveBack = Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
 
 		bool dpad_move = false;
 
