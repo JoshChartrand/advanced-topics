@@ -21,7 +21,7 @@ public class AnimationOpenTrigger : MonoBehaviour {
 					GameObject[] Items = GameObject.FindGameObjectsWithTag ("Item");
 					foreach (GameObject item in Items) {
 						if (item.GetComponent<ItemScript> ().InInventory) {
-							item.transform.SetParent (transform.parent);
+							item.transform.SetParent (transform.parent, true);
 							item.transform.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeAll;
 						}
 					}
@@ -41,7 +41,7 @@ public class AnimationOpenTrigger : MonoBehaviour {
 					GameObject[] Items = GameObject.FindGameObjectsWithTag ("Item");
 					foreach(GameObject item in Items) {
 						if (item.GetComponent<ItemScript> ().InInventory) {
-							item.transform.SetParent (transform.parent);
+							item.transform.SetParent (transform.parent, true);
 							item.transform.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeAll;
 						}
 					}

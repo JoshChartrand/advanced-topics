@@ -13,7 +13,7 @@ public class ItemScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Vector3.Distance (transform.position, GameObject.FindGameObjectWithTag("Backpack").transform.position) < 0.5f) {
+		if (Vector3.Distance (transform.position, GameObject.FindGameObjectWithTag("Backpack").transform.position) < 2.0f) {
 			InInventory = true;
 		} else {
 			InInventory = false;

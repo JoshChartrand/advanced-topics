@@ -33,43 +33,30 @@ public class Journal : MonoBehaviour {
 	void Update () {
 		//openBook.transform.position = closedBook.transform.position;
 
-		if (closebook == true) {
-			book.GetComponent<MeshFilter> ().mesh = closedBook;
-			book.GetComponent<MeshRenderer>().material.mainTexture = ClosedBookMat;
-			/*
-			closedBook.SetActive(true);
-			openBook.SetActive(false);
-			*/
-		}
-		else if (closebook == false){
+		if (book.GetComponent<OVRGrabbable>().isGrabbed && book.GetComponent<MeshFilter> ().mesh != openBook) {
 			book.GetComponent<MeshFilter> ().mesh = openBook;
 			book.GetComponent<MeshRenderer>().material.mainTexture = OpenBookMat;
-			/*
-			closedBook.SetActive(false);
-			openBook.SetActive(true);
-			*/
+		}
+		else if (!book.GetComponent<OVRGrabbable>().isGrabbed && book.GetComponent<MeshFilter> ().mesh != closedBook){
+			book.GetComponent<MeshFilter> ().mesh = closedBook;
+			book.GetComponent<MeshRenderer>().material.mainTexture = ClosedBookMat;
 		}
 
 		GlobalVariables.QuestNum = numQuest;
-		//if (numQuest != GlobalVariables.QuestNum) {
-			if(GlobalVariables.QuestNum == 1 ){ //quest 1
-			book.GetComponent<MeshRenderer>().material.mainTexture = Plant;
+		if (book.GetComponent<OVRGrabbable> ().isGrabbed) {
+			if (GlobalVariables.QuestNum == 1) { //quest 1
+				book.GetComponent<MeshRenderer> ().material.mainTexture = Plant;
+			} else if (GlobalVariables.QuestNum == 2) { //quest 1 done
+				book.GetComponent<MeshRenderer> ().material.mainTexture = PlantCrossed;
+			} else if (GlobalVariables.QuestNum == 3) { //quest 2
+				book.GetComponent<MeshRenderer> ().material.mainTexture = Meat;
+			} else if (GlobalVariables.QuestNum == 4) { //quest 2 done
+				book.GetComponent<MeshRenderer> ().material.mainTexture = MeatCrossed;
+			} else if (GlobalVariables.QuestNum == 5) { //quest 3
+				book.GetComponent<MeshRenderer> ().material.mainTexture = Bottle;
+			} else if (GlobalVariables.QuestNum == 6) { //quest 3 done
+				book.GetComponent<MeshRenderer> ().material.mainTexture = BottleCrossed;
 			}
-			else if (GlobalVariables.QuestNum == 2){ //quest 1 done
-			book.GetComponent<MeshRenderer>().material.mainTexture = PlantCrossed;
-			}
-			else if (GlobalVariables.QuestNum == 3){ //quest 2
-			book.GetComponent<MeshRenderer>().material.mainTexture =  Meat;
-			}
-			else if (GlobalVariables.QuestNum == 4){ //quest 2 done
-			book.GetComponent<MeshRenderer>().material.mainTexture = MeatCrossed;
-			}
-			else if (GlobalVariables.QuestNum == 5){ //quest 3
-			book.GetComponent<MeshRenderer>().material.mainTexture = Bottle;
-			}
-			else if (GlobalVariables.QuestNum == 6){ //quest 3 done
-			book.GetComponent<MeshRenderer>().material.mainTexture = BottleCrossed;
-			}
-		//}
+		}
 	}
 }
