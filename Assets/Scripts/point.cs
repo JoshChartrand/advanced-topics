@@ -30,7 +30,7 @@ public class point : MonoBehaviour
                 if (OVRInput.Get(OVRInput.Button.Two))
                 {
                     
-                    if (hitR.collider.gameObject.CompareTag("PickUp"))
+                    if (hitR.collider.gameObject.CompareTag("Item"))
                     {
                         float step = speed * Time.deltaTime;
                         hitR.collider.gameObject.transform.position = Vector3.MoveTowards(hitR.collider.gameObject.transform.position, transform.position, step);
@@ -55,7 +55,7 @@ public class point : MonoBehaviour
                 if (OVRInput.Get(OVRInput.Button.Four))
                 {
                    
-                    if (hitL.collider.gameObject.CompareTag("PickUp"))
+                    if (hitL.collider.gameObject.CompareTag("Item"))
                     {
                         float step = speed * Time.deltaTime;
                         hitL.collider.gameObject.transform.position = Vector3.MoveTowards(hitL.collider.gameObject.transform.position, transform.position, step);
