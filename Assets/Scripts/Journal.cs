@@ -22,10 +22,11 @@ public class Journal : MonoBehaviour {
 	public Texture Bottle;
 	public Texture BottleCrossed;
 
+	GlobalVariables globalVariables = null;
+
 	// Use this for initialization
 	void Start () {
-		//closedBook = GetComponent<GameObject>();
-		//openBook = GetComponent<GameObject>();
+		globalVariables = GameObject.FindGameObjectWithTag ("GameManager").GetComponent<GlobalVariables> ();
 		numQuest = GlobalVariables.QuestNum;
 	}
 
@@ -42,19 +43,18 @@ public class Journal : MonoBehaviour {
 			book.GetComponent<MeshRenderer>().material.mainTexture = ClosedBookMat;
 		}
 
-		GlobalVariables.QuestNum = numQuest;
 		if (book.GetComponent<OVRGrabbable> ().isGrabbed) {
-			if (GlobalVariables.QuestNum == 1) { //quest 1
+			if (globalVariables.questNum == 1) { //quest 1
 				book.GetComponent<MeshRenderer> ().material.mainTexture = Plant;
-			} else if (GlobalVariables.QuestNum == 2) { //quest 1 done
+			} else if (globalVariables.questNum == 2) { //quest 1 done
 				book.GetComponent<MeshRenderer> ().material.mainTexture = PlantCrossed;
-			} else if (GlobalVariables.QuestNum == 3) { //quest 2
+			} else if (globalVariables.questNum == 3) { //quest 2
 				book.GetComponent<MeshRenderer> ().material.mainTexture = Meat;
-			} else if (GlobalVariables.QuestNum == 4) { //quest 2 done
+			} else if (globalVariables.questNum == 4) { //quest 2 done
 				book.GetComponent<MeshRenderer> ().material.mainTexture = MeatCrossed;
-			} else if (GlobalVariables.QuestNum == 5) { //quest 3
+			} else if (globalVariables.questNum == 5) { //quest 3
 				book.GetComponent<MeshRenderer> ().material.mainTexture = Bottle;
-			} else if (GlobalVariables.QuestNum == 6) { //quest 3 done
+			} else if (globalVariables.questNum == 6) { //quest 3 done
 				book.GetComponent<MeshRenderer> ().material.mainTexture = BottleCrossed;
 			}
 		}

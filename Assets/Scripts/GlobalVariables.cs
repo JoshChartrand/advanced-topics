@@ -3,39 +3,44 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GlobalVariables : MonoBehaviour {
-	private static bool newQuest;
-	private static int questNum;
+
+	public bool newQuest;
+	public int questNum;
 	private static bool mounting;
 
 	private static bool MOVEleft;
+
+	private static bool newQuest2;
+	private static int questNum2;
 
 	// Use this for initialization
 	void Start () {
 		newQuest = true;
 		questNum = 0;
 	}
-
+		
 	public static bool NewQuest {
 
 		get {
-			return newQuest; 
+			return newQuest2; 
 		}
 
 		set {
-			newQuest = value; 
+			newQuest2 = value; 
 		}
 	}
 
 	public static int QuestNum {
 
 		get {
-			return questNum; 
+			return questNum2; 
 		}
 
 		set {
-			questNum = value; 
+			questNum2 = value; 
 		}
 	}
+
 
 	public static bool Mounting {
 
