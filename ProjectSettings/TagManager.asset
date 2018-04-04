@@ -11,6 +11,8 @@ TagManager:
   - Item
   - Saddle
   - Weapon
+  - Plant
+  - Center
   layers:
   - Default
   - TransparentFX
