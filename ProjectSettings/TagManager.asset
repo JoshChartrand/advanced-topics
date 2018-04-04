@@ -12,6 +12,7 @@ TagManager:
   - Saddle
   - Weapon
   - GameManager
+  - Center
   layers:
   - Default
   - TransparentFX
