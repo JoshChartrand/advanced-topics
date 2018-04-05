@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 114979823355590936}
   m_Layer: 0
   m_Name: walkingPig4
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -687,7 +687,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1206169879375432}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.6101155, y: 0.24, z: 13.121628}
+  m_LocalPosition: {x: 5.2678537, y: 0.00000011920929, z: 4.885109}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4310453603993300}
@@ -972,6 +972,9 @@ MonoBehaviour:
   StaMaxTime: 20
   WaiMinTime: 1
   WaiMaxTime: 8
+  health: 5
+  Meat: {fileID: 1102699238343696, guid: 5558592267c9f0547a78d215ab2fba78, type: 2}
+  Cloudpuff: {fileID: 1794756165444290, guid: eb41b4b639ce7624183890a3e4b35292, type: 2}
 --- !u!136 &136112291815069616
 CapsuleCollider:
   m_ObjectHideFlags: 1

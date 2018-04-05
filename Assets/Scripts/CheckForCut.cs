@@ -17,6 +17,7 @@ public class CheckForCut : MonoBehaviour {
 	void OnCollisionEnter(Collision col) {
 		if (col.gameObject.name == "Sickle" && col.relativeVelocity.magnitude >= 20) {
 			GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.None;
+			transform.localScale = new Vector3 (transform.localScale.x * 0.5f, transform.localScale.y * 0.5f, transform.localScale.z * 0.5f);
 		}
 	}
 }

@@ -13,6 +13,7 @@ TagManager:
   - Weapon
   - GameManager
   - Center
+  - Compass
   layers:
   - Default
   - TransparentFX
