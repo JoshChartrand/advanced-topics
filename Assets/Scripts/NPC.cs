@@ -21,6 +21,7 @@ public class NPC : MonoBehaviour {
 
 	GlobalVariables globalVariables = null;
 	CollectItems collectItems = null;
+	Compass compass = null;
 
 	// Use this for initialization
 	void Start () {
@@ -28,6 +29,7 @@ public class NPC : MonoBehaviour {
 		collectItems = GameObject.Find ("ItemTrigger").GetComponent<CollectItems> ();
 		pos = new Vector3 (transform.position.x, transform.position.y + above, transform.position.z);
 		Exclamation.transform.position = pos;
+		compass = GameObject.FindGameObjectWithTag ("Compass").GetComponent<Compass> ();
 	}
 	
 	// Update is called once per frame
@@ -78,5 +80,10 @@ public class NPC : MonoBehaviour {
 		CurrentlyInDialogue = false;
 		globalVariables.questNum++;
 		collectItems.UpdateItemCount ();
+		if (globalVariables.questNum == 1) { //quest 1
+			compass.SetNewObjectives("Plant");
+		} else if (globalVariables.questNum == 3) { //quest 1 done
+			compass.SetNewObjectives("Pig");
+		} 
 	}
 }

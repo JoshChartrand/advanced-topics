@@ -29,14 +29,11 @@ public class AI : MonoBehaviour {
 	private float WaiRandTime;
 
 	private float y;
-	//public Texture2D catTex;
-	//public Texture2D zombieTex;
-	//private SkinnedMeshRenderer rend;
 
-	//private bool zombie;
+	public float health = 50.0f;
 
-	//public Text score; 
-	//private int num;
+	public GameObject Meat = null;
+	public GameObject Cloudpuff = null;
 
 	// Use this for initialization
 	void Start () {
@@ -85,6 +82,13 @@ public class AI : MonoBehaviour {
 		if(y != transform.position.y){
 			transform.position = new Vector3 (transform.position.x, y, transform.position.z);
 		}
+
+		if (health <= 0) {
+			Instantiate (Meat, transform.position, transform.rotation);
+			Instantiate (Cloudpuff, transform.position, transform.rotation);
+			//PLAY SOUND
+			Destroy (transform.gameObject);
+		}
 	}
 
 	Vector3 ChooseDirection()
@@ -107,6 +111,9 @@ public class AI : MonoBehaviour {
 
 	void OnCollisionEnter(Collision col)
 	{
-		
+		if (col.gameObject.name.Contains("Rock")) {
+			health -= col.relativeVelocity.magnitude;
+			// PLAY PIGGIE SOUND
+		}
 	}
 }
