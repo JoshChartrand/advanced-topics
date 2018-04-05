@@ -15,7 +15,9 @@ public class NPC : MonoBehaviour {
 	public AudioClip ThirdQuestClip;
 	public AudioClip EndingClip;
 
-	private float distance;
+    AudioSource audioSource;
+
+    private float distance;
 	private Vector3 pos;
 	private bool CurrentlyInDialogue;
 
@@ -55,24 +57,39 @@ public class NPC : MonoBehaviour {
 	}
 
 	void PlayDialogue() {
-		if (globalVariables.questNum == 0) { //quest 1
+
+        AudioSource audio = GetComponent<AudioSource>();
+        
+        if (globalVariables.questNum == 0) { //quest 1
 			CurrentlyInDialogue = true;
-			GetComponent<AudioSource> ().Play ();
-			//PLAY AUDIO TRACK	
-		} else if (globalVariables.questNum == 2) { //quest 1 done
+
+            //PLAY AUDIO TRACK	
+            audio.PlayOneShot(FirstQuestClip, 0.7F);
+        }
+
+        else if (globalVariables.questNum == 2) { //quest 1 done
 			CurrentlyInDialogue = true;
-			GetComponent<AudioSource> ().Play ();
-			//PLAY AUDIO TRACK	
-		} else if (globalVariables.questNum == 4) { //quest 2 done
+
+            //PLAY AUDIO TRACK	
+            audio.PlayOneShot(SecondQuestClip, 0.7F);
+            
+
+        } else if (globalVariables.questNum == 4) { //quest 2 done
 			CurrentlyInDialogue = true;
-			GetComponent<AudioSource> ().Play ();
-			//PLAY AUDIO TRACK	
-		} else if (globalVariables.questNum == 6) { //quest 3 done
+
+            //PLAY AUDIO TRACK	
+            audio.PlayOneShot(ThirdQuestClip, 0.7F);
+
+        } else if (globalVariables.questNum == 6) { //quest 3 done
 			CurrentlyInDialogue = true;
-			GetComponent<AudioSource> ().Play ();
-			//PLAY AUDIO TRACK	
-		}
-	}
+
+            //PLAY AUDIO TRACK	
+            audio.PlayOneShot(EndingClip, 0.7F);
+
+        }
+
+        
+    }
 
 	void ProceedToNextQuest() {
 		CurrentlyInDialogue = false;
