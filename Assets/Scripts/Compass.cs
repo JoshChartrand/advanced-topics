@@ -38,7 +38,9 @@ public class Compass : MonoBehaviour
 
         for(int i = 0; i < centerObjects.Length; i++)
         {
-            centerObjects[i].transform.position = new Vector3(centerObjects[i].transform.position.x, transform.position.y, centerObjects[i].transform.position.z);
+			if (centerObjects [i] != null) {
+				centerObjects[i].transform.position = new Vector3(centerObjects[i].transform.position.x, transform.position.y, centerObjects[i].transform.position.z);
+			}
         }
 
         int closest = -1;
@@ -47,11 +49,13 @@ public class Compass : MonoBehaviour
 
         foreach (GameObject item in Objectives)
         {
-			if (!item.GetComponent<ItemScript> ().InInventory) {
-				float CurrentItemDistance = Vector3.Distance(transform.position, item.transform.position);
-				if(CurrentItemDistance < maxDist) {
-					maxDist = CurrentItemDistance;
-					closest = ind;
+			if (item) {
+				if (!item.GetComponent<ItemScript> ().InInventory) {
+					float CurrentItemDistance = Vector3.Distance (transform.position, item.transform.position);
+					if (CurrentItemDistance < maxDist) {
+						maxDist = CurrentItemDistance;
+						closest = ind;
+					}
 				}
 			}
 			ind++;

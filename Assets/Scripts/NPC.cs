@@ -15,6 +15,10 @@ public class NPC : MonoBehaviour {
 	public AudioClip ThirdQuestClip;
 	public AudioClip EndingClip;
 
+	public AudioClip FirstQuestComplete;
+	public AudioClip SecondQuestComplete;
+	public AudioClip ThirdQuestComplete;
+
     AudioSource audioSource;
 
     private float distance;
@@ -25,8 +29,15 @@ public class NPC : MonoBehaviour {
 	CollectItems collectItems = null;
 	Compass compass = null;
 
+	public AudioSource audio = null;
+
+	int plantCount;
+	int meatCount;
+	int bottleCount;
+
 	// Use this for initialization
 	void Start () {
+		audio = GetComponent<AudioSource>();
 		globalVariables = GameObject.FindGameObjectWithTag ("GameManager").GetComponent<GlobalVariables> ();
 		collectItems = GameObject.Find ("ItemTrigger").GetComponent<CollectItems> ();
 		pos = new Vector3 (transform.position.x, transform.position.y + above, transform.position.z);
@@ -59,9 +70,7 @@ public class NPC : MonoBehaviour {
 	}
 
 	void PlayDialogue() {
-
-        AudioSource audio = GetComponent<AudioSource>();
-        
+	        
         if (globalVariables.questNum == 0) { //quest 1
 			CurrentlyInDialogue = true;
 
@@ -103,4 +112,46 @@ public class NPC : MonoBehaviour {
 			compass.SetNewObjectives("Pig");
 		} 
 	}
+
+	void OnTriggerEnter(Collider col) {
+		if (col.gameObject.tag == "Player") {
+			CheckForItems ();
+			PlayFollowupAudio ();
+			ResetItems ();
+		}
+	}
+
+	void CheckForItems() {
+		GameObject[] items = GameObject.FindGameObjectsWithTag ("Item");
+		foreach (GameObject item in items) {
+			if (item.GetComponent<ItemScript> ()) {
+				if(item.GetComponent<ItemScript> ().InInventory) {
+					if (globalVariables.questNum == 1 && item.name.Contains("Plant")) { //quest 1
+						plantCount++;
+					} else if (globalVariables.questNum == 3 && item.name.Contains("Meat")) { //quest 2
+						meatCount++;
+					} else if (globalVariables.questNum == 5 && item.name.Contains("Bottle")) { //quest 3
+						bottleCount++;
+					} 
+				}
+			}
+		}
+	}
+
+	void PlayFollowupAudio () {
+		if (plantCount >= 3) { //quest 1
+			audio.PlayOneShot(FirstQuestComplete);
+		} else if (meatCount >= 2) { //quest 2
+			audio.PlayOneShot(SecondQuestComplete);
+		} else if (bottleCount >= 1) { //quest 3
+			audio.PlayOneShot(ThirdQuestComplete);
+		} 
+	}
+
+	void ResetItems() {
+		plantCount = 0;
+		meatCount = 0;
+		bottleCount = 0;
+	}
+
 }

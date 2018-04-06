@@ -7,8 +7,11 @@ public class CollectItems : MonoBehaviour {
 	int itemCount;
 	GlobalVariables globalVariables = null;
 
+	NPC npc = null;
+
 	// Use this for initialization
 	void Start () {
+		npc = GameObject.FindGameObjectWithTag ("NPC").GetComponent<NPC> ();
 		globalVariables = GameObject.FindGameObjectWithTag ("GameManager").GetComponent<GlobalVariables> ();
 		UpdateItemCount ();
 	}
