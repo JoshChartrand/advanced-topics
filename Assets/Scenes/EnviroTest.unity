@@ -1555,6 +1555,11 @@ Prefab:
       propertyPath: m_TagString
       value: NPC
       objectReference: {fileID: 0}
+    - target: {fileID: 114322726783111114, guid: 6f9b57e6451cc434bbde6668aae4748e,
+        type: 2}
+      propertyPath: FirstQuestClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b46fd544b66f73b4f8ec9d7e73485311, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6f9b57e6451cc434bbde6668aae4748e, type: 2}
   m_IsPrefabParent: 0
