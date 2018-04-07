@@ -43,9 +43,9 @@ public class AI : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        PigNoise = GetComponent<AudioSource>();
+        //PigNoise = GetComponent<AudioSource>();
 
-        PigPoof = GetComponent<AudioSource>();
+        //PigPoof = GetComponent<AudioSource>();
 
         rbody = GetComponent<Rigidbody> ();
 		moveDir = ChooseDirection ();
@@ -66,6 +66,7 @@ public class AI : MonoBehaviour {
 		if(Statimez + StaRandTime > Time.time){
 			rbody.velocity = moveDir * moveForce;
 			if(Physics.Raycast(transform.position, transform.forward, maxDistFromWall, whatIsWall)){
+				PigNoise.PlayScheduled (1.0f);
 				moveDir = ChooseDirection ();
 				transform.rotation = Quaternion.LookRotation (moveDir);
 			}
@@ -97,9 +98,13 @@ public class AI : MonoBehaviour {
             //PLAY SOUND
             PigPoof.Play();
 
+
             Instantiate (Meat, transform.position, transform.rotation);
 			Instantiate (Cloudpuff, transform.position, transform.rotation);
-            Destroy (transform.gameObject);
+			GetComponent<CapsuleCollider> ().enabled = false;
+			transform.position = new Vector3 (10000.0f, -10000.0f, 10000.0f);
+			health = 100;
+			Invoke ("DestroyOnEnd", 3.0f);
 		}
 	}
 
@@ -131,5 +136,9 @@ public class AI : MonoBehaviour {
             
 
         }
+	}
+
+	void DestroyOnEnd() {
+		Destroy (transform.gameObject);
 	}
 }

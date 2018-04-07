@@ -5,6 +5,7 @@ using UnityEngine;
 public class SnapIntoPlace : MonoBehaviour {
 
 	OVRGrabbable grabbable;
+	bool playSound = true;
 
 	// Use this for initialization
 	void Start () {
@@ -17,6 +18,10 @@ public class SnapIntoPlace : MonoBehaviour {
 		if (!grabbable.isGrabbed) {
 			transform.position = transform.parent.position;
 			transform.rotation = transform.parent.rotation;
+			playSound = true;
+		} else if (playSound) {
+			playSound = false;
+			GetComponent<AudioSource> ().Play ();
 		}
 
 	}
