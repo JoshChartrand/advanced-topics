@@ -15,6 +15,7 @@ TagManager:
   - Center
   - Compass
   - NPC
+  - Fence
   layers:
   - Default
   - TransparentFX

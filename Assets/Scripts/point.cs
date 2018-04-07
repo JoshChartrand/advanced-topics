@@ -23,17 +23,17 @@ public class point : MonoBehaviour
             
             RaycastHit hitR;
             
-            if (Physics.Raycast(ray, out hitR, 100))
+            if (Physics.Raycast(ray, out hitR, 600))
             {
 
                
                 if (OVRInput.Get(OVRInput.Button.Two))
                 {
                     
-                    if (hitR.collider.gameObject.CompareTag("Item"))
+					if (hitR.collider.gameObject.GetComponent<OVRGrabbable>() && !hitR.collider.gameObject.name.Contains("Book"))
                     {
                         float step = speed * Time.deltaTime;
-                        hitR.collider.gameObject.transform.position = Vector3.MoveTowards(hitR.collider.gameObject.transform.position, transform.position, step);
+						hitR.collider.gameObject.transform.position = Vector3.MoveTowards(hitR.collider.gameObject.transform.position, indexPoint.position, step);
                     }
                     
                  }
@@ -48,17 +48,17 @@ public class point : MonoBehaviour
             Ray ray = new Ray(indexBase.position, indexPoint.position - indexBase.position);
            
             RaycastHit hitL;
-            if (Physics.Raycast(ray, out hitL, 100))
+            if (Physics.Raycast(ray, out hitL, 600))
             {
 
                 
                 if (OVRInput.Get(OVRInput.Button.Four))
                 {
                    
-                    if (hitL.collider.gameObject.CompareTag("Item"))
+					if (hitL.collider.gameObject.GetComponent<OVRGrabbable>() && !hitL.collider.gameObject.name.Contains("Book"))
                     {
                         float step = speed * Time.deltaTime;
-                        hitL.collider.gameObject.transform.position = Vector3.MoveTowards(hitL.collider.gameObject.transform.position, transform.position, step);
+						hitL.collider.gameObject.transform.position = Vector3.MoveTowards(hitL.collider.gameObject.transform.position, indexPoint.position, step);
                     }
                 }
             }

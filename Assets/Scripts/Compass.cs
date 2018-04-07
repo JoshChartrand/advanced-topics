@@ -50,7 +50,16 @@ public class Compass : MonoBehaviour
         foreach (GameObject item in Objectives)
         {
 			if (item) {
-				if (!item.GetComponent<ItemScript> ().InInventory) {
+				ItemScript inventoryCheck = item.GetComponent<ItemScript> ();
+				if (inventoryCheck != null) {
+					if (!item.GetComponent<ItemScript> ().InInventory) {
+						float CurrentItemDistance = Vector3.Distance (transform.position, item.transform.position);
+						if (CurrentItemDistance < maxDist) {
+							maxDist = CurrentItemDistance;
+							closest = ind;
+						}
+					}
+				} else {
 					float CurrentItemDistance = Vector3.Distance (transform.position, item.transform.position);
 					if (CurrentItemDistance < maxDist) {
 						maxDist = CurrentItemDistance;
@@ -73,6 +82,7 @@ public class Compass : MonoBehaviour
     }
 
 	public void SetNewObjectives(string ItemName) {
+		Objectives.Clear ();
 		foreach (GameObject item in GameObject.FindGameObjectsWithTag("Item"))
 		{
 			if(item.name.Contains(ItemName))
