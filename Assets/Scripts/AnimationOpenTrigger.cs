@@ -20,18 +20,26 @@ public class AnimationOpenTrigger : MonoBehaviour {
 				if (GetComponentInParent<Animator> ().GetBool ("Pressed") == false) {
 					GameObject[] Items = GameObject.FindGameObjectsWithTag ("Item");
 					foreach (GameObject item in Items) {
-						if (item.GetComponent<ItemScript> ().InInventory) {
-							item.transform.SetParent (transform.parent, true);
-							item.transform.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeAll;
-						}
+                        ItemScript itemScript = item.GetComponent<ItemScript>();
+                        if (itemScript != null)
+                        {
+                            if (item.GetComponent<ItemScript>().InInventory)
+                            {
+                                item.transform.SetParent(transform.parent, true);
+                                item.transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+                            }
+                        }
 					}
 				} else if (GetComponentInParent<Animator> ().GetBool ("Pressed") == true) {
 					GameObject[] Items = GameObject.FindGameObjectsWithTag ("Item");
 					foreach (GameObject item in Items) {
-						if (item.GetComponent<ItemScript> ().InInventory) {
-							item.transform.parent = null;
-							item.transform.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.None;
-						}
+                        ItemScript itemScript = item.GetComponent<ItemScript>();
+                        if(itemScript != null) { 
+                            if (item.GetComponent<ItemScript> ().InInventory) {
+							    item.transform.parent = null;
+							    item.transform.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.None;
+						    }
+                        }
 					}
 				}
 			}
@@ -40,18 +48,28 @@ public class AnimationOpenTrigger : MonoBehaviour {
 				if(GetComponentInParent<Animator> ().GetBool("Pressed") == false) {
 					GameObject[] Items = GameObject.FindGameObjectsWithTag ("Item");
 					foreach(GameObject item in Items) {
-						if (item.GetComponent<ItemScript> ().InInventory) {
-							item.transform.SetParent (transform.parent, true);
-							item.transform.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeAll;
-						}
+                        ItemScript itemScript = item.GetComponent<ItemScript>();
+                        if (itemScript != null)
+                        {
+                            if (item.GetComponent<ItemScript>().InInventory)
+                            {
+                                item.transform.SetParent(transform.parent, true);
+                                item.transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+                            }
+                        }
 					}
 				} else if (GetComponentInParent<Animator> ().GetBool ("Pressed") == true) {
 					GameObject[] Items = GameObject.FindGameObjectsWithTag ("Item");
 					foreach (GameObject item in Items) {
-						if (item.GetComponent<ItemScript> ().InInventory) {
-							item.transform.parent = null;
-							item.transform.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.None;
-						}
+                        ItemScript itemScript = item.GetComponent<ItemScript>();
+                        if (itemScript != null)
+                        {
+                            if (item.GetComponent<ItemScript>().InInventory)
+                            {
+                                item.transform.parent = null;
+                                item.transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+                            }
+                        }
 					}
 				}
 			}
