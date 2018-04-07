@@ -35,9 +35,19 @@ public class AI : MonoBehaviour {
 	public GameObject Meat = null;
 	public GameObject Cloudpuff = null;
 
-	// Use this for initialization
-	void Start () {
-		rbody = GetComponent<Rigidbody> ();
+    AudioSource audioSource;
+
+    public AudioSource PigNoise = null;
+
+    public AudioSource PigPoof = null;
+
+    // Use this for initialization
+    void Start () {
+        PigNoise = GetComponent<AudioSource>();
+
+        PigPoof = GetComponent<AudioSource>();
+
+        rbody = GetComponent<Rigidbody> ();
 		moveDir = ChooseDirection ();
 		transform.rotation = Quaternion.LookRotation (moveDir);
 		//rend = catMesh.GetComponent<SkinnedMeshRenderer> ();
@@ -84,10 +94,12 @@ public class AI : MonoBehaviour {
 		}
 
 		if (health <= 0) {
-			Instantiate (Meat, transform.position, transform.rotation);
+            //PLAY SOUND
+            PigPoof.Play();
+
+            Instantiate (Meat, transform.position, transform.rotation);
 			Instantiate (Cloudpuff, transform.position, transform.rotation);
-			//PLAY SOUND
-			Destroy (transform.gameObject);
+            Destroy (transform.gameObject);
 		}
 	}
 
@@ -112,8 +124,12 @@ public class AI : MonoBehaviour {
 	void OnCollisionEnter(Collision col)
 	{
 		if (col.gameObject.name.Contains("Rock")) {
-			health -= col.relativeVelocity.magnitude;
-			// PLAY PIGGIE SOUND
-		}
+            // PLAY PIGGIE SOUND
+            PigNoise.Play();
+
+            health -= col.relativeVelocity.magnitude;
+            
+
+        }
 	}
 }
