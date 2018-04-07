@@ -238,7 +238,7 @@ public class OVRPlayerController : MonoBehaviour
 			return;
 
 		moveForward = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
-		moveLeft = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow) || GlobalVariables.moveLEFT;
+		moveLeft = Input.GetKey (KeyCode.A) || Input.GetKey (KeyCode.LeftArrow);
 		moveRight = Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow);
 		moveBack = Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
 

@@ -9,6 +9,7 @@ public class PlayerControls : MonoBehaviour {
 	public GameObject rightAnchor;
 	private float handZ;
 	private float originZ;
+	private float originX;
 	private float handX;
 
 	public bool IsMounted = false;
@@ -23,6 +24,8 @@ public class PlayerControls : MonoBehaviour {
 	GameObject rightHand;
 	Vector3 Direct;
 	float handsPositions;
+
+	float direction;
 
 	// Use this for initialization
 	void Start () {
@@ -54,71 +57,42 @@ public class PlayerControls : MonoBehaviour {
 
 		if (leftHand != null && rightHand != null) {
 			handsPositions = Vector3.Distance (rightHand.transform.position, leftHand.transform.position);
-			//Direct = rightHand.transform.position - leftHand.transform.position;
-			//handsDistance = Direct;
-			//Direct.Normalize ();
 
-			//print ("Direction : " + Direct);
-			//if (OVRInput.Get (OVRInput.Axis1D.PrimaryHandTrigger) > 0 && OVRInput.Get (OVRInput.Axis1D.PrimaryIndexTrigger) > 0 && OVRInput.Get (OVRInput.Axis1D.SecondaryHandTrigger) > 0 && OVRInput.Get (OVRInput.Axis1D.SecondaryIndexTrigger) > 0) {
-				//print ("Left Hand Positions: " + leftHand.transform.position);
-				//print ("Right Hand Positions: " + rightHand.transform.position);
-				//print ("Player Position: " + transform.position);
-			//}
 			if(GlobalVariables.Mounting == true){
 				//makes sure both hands are in a fist
 				if (OVRInput.Get (OVRInput.Axis1D.PrimaryHandTrigger) > 0 && OVRInput.Get (OVRInput.Axis1D.PrimaryIndexTrigger) > 0 && OVRInput.Get (OVRInput.Axis1D.SecondaryHandTrigger) > 0 && OVRInput.Get (OVRInput.Axis1D.SecondaryIndexTrigger) > 0) {
-					//Vector3 applesauce = new Vector3(transform.position.x * Direct.x, transform.position.y * Direct.y, transform.position.z * Direct.z);
-					//print (applesauce);
-
-					print ("leftHand " + leftAnchor.transform.localPosition);
-					print ("rightHand " + rightAnchor.transform.localPosition);
-
-					handZ = ((leftAnchor.transform.localPosition.z + rightAnchor.transform.localPosition.z) / 2);
-					//if both hands are forward move forward
-					//velocity forward
-					if(handZ > originZ ){
-						print ("move");
-						handZ = handZ - originZ ;
-						handZ = handZ * 4;
-						Vector3 temp = new Vector3(transform.forward.x * handZ, transform.forward.y * handZ, transform.forward.z * handZ);
-						GetComponent<OVRPlayerController> ().SetMoveScaleMultiplier (handZ);
-						GetComponent<CharacterController> ().Move (temp);
-					}
 
 					handZ = ((leftAnchor.transform.localPosition.z + rightAnchor.transform.localPosition.z) / 2);
 
 					//if both hands are near chest stop
 					//no velocity
 					if(handZ <= originZ){
-						print ("stop");
 						GetComponent<OVRPlayerController> ().SetMoveScaleMultiplier (0.0f);
 					}
-
-					//print("Player: " + transform.position);
-					//print("Left Controller: " + leftHand.transform.position);
-					//print("Right Controller: " + rightHand.transform.position);
+						
+					print (handX - originX);
 
 					//if both hands are right go right
 					//turn players forward right
 					handX = ((leftAnchor.transform.localPosition.x + rightAnchor.transform.localPosition.x) / 2);
-					if(handX > 0){
-						print ("right");
-						//OVRPlayerController.moveRight == true;
-					}else{
-						//OVRPlayerController.moveRight == false;
-					}
-
-					handX = ((leftAnchor.transform.localPosition.x + rightAnchor.transform.localPosition.x) / 2);
-					//if both hands are left go left
-					//turn player forward left
-					if (handX < 0) {
-						print ("left");
-						GlobalVariables.moveLEFT = true;
+					handX -= originX;
+					if (handX > 0.2) {
+						//print ("right");
+						transform.rotation *= Quaternion.Euler(new Vector3(0.0f, 1.005f, 0.0f));
+					} else if (handX < -0.2) {
+						//print ("left");
+						transform.rotation *= Quaternion.Euler(new Vector3(0.0f, -1.005f, 0.0f));
 					} else {
-						GlobalVariables.moveLEFT = false;
+						direction = 1.0f;
 					}
 
-					//transform.Translate ( Direct.x * 1.2f,  Direct.y * 1.2f, Direct.z * 1.2f);
+					if(handZ > originZ ){
+						handZ = handZ - originZ ;
+						handZ = handZ * 2;
+						Vector3 temp = new Vector3(transform.forward.x * handZ, transform.forward.y * handZ, transform.forward.z * handZ);
+						GetComponent<OVRPlayerController> ().SetMoveScaleMultiplier (handZ);
+						GetComponent<CharacterController> ().Move (temp);
+					}
 				}
 			}
 		}
@@ -130,6 +104,7 @@ public class PlayerControls : MonoBehaviour {
 
 	public void Mount(GameObject mount) {
 		originZ = ((leftAnchor.transform.localPosition.z + rightAnchor.transform.localPosition.z) / 2);
+		originX = ((leftAnchor.transform.localPosition.x + rightAnchor.transform.localPosition.x) / 2);
 		GetComponent<OVRPlayerController> ().SetMoveScaleMultiplier (2.0f);
 		Mountable = mount;
 		IsMounted = true;

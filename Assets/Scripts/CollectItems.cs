@@ -32,13 +32,12 @@ public class CollectItems : MonoBehaviour {
 		//Increase count
 		//Tell NPC to give next quest
 
-		Debug.Log (col.gameObject.name);
-
 		if(globalVariables.questNum == 1 ){ //quest 1
 			if (col.gameObject.name.Contains ("Plant")) {
 				Destroy (col.gameObject);
 				itemCount--;
 				CheckForQuestCompletion ();
+				GetComponent<AudioSource> ().Play ();
 			}
 		}
 		else if (globalVariables.questNum == 3){ //quest 2
@@ -46,6 +45,7 @@ public class CollectItems : MonoBehaviour {
 				Destroy (col.gameObject);
 				itemCount--;
 				CheckForQuestCompletion ();
+				GetComponent<AudioSource> ().Play ();
 			}		
 		}
 		else if (globalVariables.questNum == 5){ //quest 3
@@ -53,6 +53,7 @@ public class CollectItems : MonoBehaviour {
 				Destroy (col.gameObject);
 				itemCount--;
 				CheckForQuestCompletion ();
+				GetComponent<AudioSource> ().Play ();
 			}		
 		}
 
