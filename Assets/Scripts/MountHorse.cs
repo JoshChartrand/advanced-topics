@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MountHorse : MonoBehaviour {
 
-	bool IsOverlapping = false;
+	public bool IsOverlapping = false;
 
 	GameObject Player = null;
 

@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 114080325354496542}
   - component: {fileID: 114639438424363988}
   - component: {fileID: 82227423536930276}
+  - component: {fileID: 114762509287329354}
   m_Layer: 0
   m_Name: Plant
   m_TagString: Item
@@ -246,6 +247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0750907e006bae74aa2808e20b5aa890, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cut: 0
   audio: {fileID: 82227423536930276}
 --- !u!114 &114639438424363988
 MonoBehaviour:
@@ -264,3 +266,14 @@ MonoBehaviour:
   m_snapOffset: {fileID: 0}
   m_grabPoints:
   - {fileID: 65341628493955400}
+--- !u!114 &114762509287329354
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1008009978803266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 519440a1339bfc6419e656e09aba78e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

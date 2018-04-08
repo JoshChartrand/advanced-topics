@@ -26,6 +26,9 @@ GameObject:
   - component: {fileID: 114906777412615400}
   - component: {fileID: 114393384298628830}
   - component: {fileID: 65199475089716170}
+  - component: {fileID: 136652484283462942}
+  - component: {fileID: 114983311043843196}
+  - component: {fileID: 82403861311797562}
   m_Layer: 0
   m_Name: Sickle
   m_TagString: Item
@@ -39,13 +42,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1442047217535380}
-  m_LocalRotation: {x: -0.4978153, y: -0, z: -0, w: 0.8672831}
-  m_LocalPosition: {x: -20.4, y: 6.57, z: -7.71}
+  m_LocalRotation: {x: -0.0038336331, y: -0, z: -0, w: 0.99999267}
+  m_LocalPosition: {x: -20.6, y: 9.97, z: 12.96}
   m_LocalScale: {x: 7, y: 7, z: 7}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -59.711002, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -0.439, y: 0, z: 0}
 --- !u!23 &23820310575999378
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -126,8 +129,88 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.02, y: 0.06, z: -0.02}
+  m_Size: {x: 0.09, y: 0.12, z: 0.1}
   m_Center: {x: 0.015, y: -0.1, z: 0}
+--- !u!82 &82403861311797562
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1442047217535380}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: e04c6255d3060e9469f3e107e2d06a6b, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &114393384298628830
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -144,7 +227,9 @@ MonoBehaviour:
   m_snapOrientation: 0
   m_snapOffset: {fileID: 0}
   m_grabPoints:
+  - {fileID: 64289384436909524}
   - {fileID: 65199475089716170}
+  - {fileID: 136652484283462942}
 --- !u!114 &114906777412615400
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -157,3 +242,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InInventory: 0
+--- !u!114 &114983311043843196
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1442047217535380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e828f583bb4c794a909121b84155f9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 1.25
+  Left: 1
+  leftHand: {fileID: 0}
+  rightHand: {fileID: 0}
+--- !u!136 &136652484283462942
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1442047217535380}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.03
+  m_Height: 0.12
+  m_Direction: 1
+  m_Center: {x: 0.015, y: -0.09, z: 0}

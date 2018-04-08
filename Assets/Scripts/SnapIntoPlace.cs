@@ -24,23 +24,26 @@ public class SnapIntoPlace : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//body = GameObject.Find("body_JNT");
-		if (Left == false) {
-			finger = GameObject.Find ("hands:b_r_index1").transform;
-			hand = GameObject.Find ("hands:b_r_hand").transform;
-			TempPos = finger.position - hand.position;
-			normal = Vector3.Normalize (TempPos);
-			elbowPos = hand.position;
-			elbowPos = elbowPos - (normal * distance);
-		}
-		if(Left == true){
-			finger = GameObject.Find ("hands:b_l_index1").transform;
-			hand = GameObject.Find ("hands:b_l_hand").transform;
-
-			TempPos = finger.position - hand.position;
-			normal = Vector3.Normalize (TempPos);
-			elbowPos = hand.position;
-			elbowPos = elbowPos - (normal * distance);
-		}
+			if (Left == false) {
+				finger = GameObject.Find ("hands:b_r_index1").transform;
+				hand = GameObject.Find ("hands:b_r_hand").transform;
+				if(finger != null && hand != null) {
+					TempPos = finger.position - hand.position;
+					normal = Vector3.Normalize (TempPos);
+					elbowPos = hand.position;
+					elbowPos = elbowPos - (normal * distance);
+				}
+			}
+			if (Left == true) {
+				finger = GameObject.Find ("hands:b_l_index1").transform;
+				hand = GameObject.Find ("hands:b_l_hand").transform;
+				if(finger != null && hand != null) {
+					TempPos = finger.position - hand.position;
+					normal = Vector3.Normalize (TempPos);
+					elbowPos = hand.position;
+					elbowPos = elbowPos - (normal * distance);
+				}
+			}
 
 		if (!grabbable.isGrabbed) {
 			//transform.position = transform.parent.position;
@@ -52,7 +55,10 @@ public class SnapIntoPlace : MonoBehaviour {
 			playSound = true;
 		} else if (playSound) {
 			playSound = false;
-			GetComponent<AudioSource> ().Play ();
+			AudioSource audioSource = GetComponent<AudioSource> ();
+			if (audioSource != null) {
+				GetComponent<AudioSource> ().Play ();
+			}
 		}
 
 

@@ -78,10 +78,10 @@ public class PlayerControls : MonoBehaviour {
 					handX -= originX;
 					if (handX > 0.2) {
 						//print ("right");
-						transform.rotation *= Quaternion.Euler(new Vector3(0.0f, (handX * 0.001) + 1.0f, 0.0f));
-					} else if (handX < -0.2) {
+						transform.rotation *= Quaternion.Euler(new Vector3(0.0f, (handX * 0.001f) + 1.0f, 0.0f));
+					} else if (handX < -0.1) {
 						//print ("left");
-						transform.rotation *= Quaternion.Euler(new Vector3(0.0f, ((handX * 0.001) + 1.0f) * -1.0f, 0.0f));
+						transform.rotation *= Quaternion.Euler(new Vector3(0.0f, ((handX * 0.001f) + 1.0f) * -1.0f, 0.0f));
 					} else {
 						direction = 1.0f;
 					}
@@ -121,6 +121,7 @@ public class PlayerControls : MonoBehaviour {
 		Mountable.GetComponent<Animator>().SetFloat("Velocity", 0.0f);
 		GetComponent<OVRPlayerController> ().SetMoveScaleMultiplier (1.0f);
 		IsMounted = false;
+		GetComponentInChildren<MountHorse> ().IsOverlapping = false;
 		GlobalVariables.Mounting = IsMounted;
 		Mountable.transform.parent = null;
 		Mountable.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.None;
@@ -131,6 +132,8 @@ public class PlayerControls : MonoBehaviour {
 		Mountable.transform.rotation = Quaternion.LookRotation (lookAtPosition);
 		trackingSpace.transform.localPosition = new Vector3(trackingSpace.transform.localPosition.x, trackingSpace.transform.localPosition.y - 1.0f, trackingSpace.transform.localPosition.z);
 		ChangeLayerRecursively (Mountable.transform, "Default");
+
+		print (GetComponentInChildren<MountHorse> ().IsOverlapping);
 	}
 
 	void ChangeLayerRecursively(Transform trans, string name) {
