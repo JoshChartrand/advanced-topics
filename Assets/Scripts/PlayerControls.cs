@@ -78,10 +78,10 @@ public class PlayerControls : MonoBehaviour {
 					handX -= originX;
 					if (handX > 0.2) {
 						//print ("right");
-						transform.rotation *= Quaternion.Euler(new Vector3(0.0f, 1.005f, 0.0f));
+						transform.rotation *= Quaternion.Euler(new Vector3(0.0f, (handX * 0.001) + 1.0f, 0.0f));
 					} else if (handX < -0.2) {
 						//print ("left");
-						transform.rotation *= Quaternion.Euler(new Vector3(0.0f, -1.005f, 0.0f));
+						transform.rotation *= Quaternion.Euler(new Vector3(0.0f, ((handX * 0.001) + 1.0f) * -1.0f, 0.0f));
 					} else {
 						direction = 1.0f;
 					}
