@@ -13,6 +13,8 @@ public class SnapIntoPlace : MonoBehaviour {
 	public bool Left;
 	private Transform finger;
 	private Transform hand;
+	public GameObject leftHand;
+	public GameObject rightHand;
 
 	// Use this for initialization
 	void Start () {
@@ -33,6 +35,7 @@ public class SnapIntoPlace : MonoBehaviour {
 		if(Left == true){
 			finger = GameObject.Find ("hands:b_l_index1").transform;
 			hand = GameObject.Find ("hands:b_l_hand").transform;
+
 			TempPos = finger.position - hand.position;
 			normal = Vector3.Normalize (TempPos);
 			elbowPos = hand.position;
